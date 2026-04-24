@@ -1,11 +1,35 @@
-import { rgPath } from '@vscode/ripgrep';
-
 import { rules as allRules } from './rules/index.js';
 import type { Config, Finding, Rule, ScanResult } from './types/common.js';
 
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
+
+/**
+ * Resolves the ripgrep binary path.
+ * Prefers the system-installed `rg` (e.g. via Homebrew) to avoid issues with
+ * `@vscode/ripgrep` postinstall scripts being skipped by package managers like pnpm.
+ * Falls back to the bundled binary from `@vscode/ripgrep`.
+ */
+function resolveRgPath(): string {
+  const whichCmd = process.platform === 'win32' ? 'where' : 'which';
+  const result = spawnSync(whichCmd, ['rg'], { encoding: 'utf8' });
+
+  if (result.status === 0 && result.stdout.trim()) {
+    return result.stdout.trim().split('\n')[0].trim();
+  }
+
+  try {
+    const require = createRequire(import.meta.url);
+    const { rgPath } = require('@vscode/ripgrep') as { rgPath: string };
+    return rgPath;
+  } catch {
+    return 'rg';
+  }
+}
+
+const rgBin = resolveRgPath();
 
 /** Ripgrep JSON match output type. */
 interface RgMatch {
@@ -221,7 +245,7 @@ export async function scan(config: Config): Promise<ScanResult> {
  */
 function runRipgrep(args: string[]): Promise<string> {
   return new Promise((resolve, reject) => {
-    const rg = spawn(rgPath, args, { stdio: ['ignore', 'pipe', 'pipe'] });
+    const rg = spawn(rgBin, args, { stdio: ['ignore', 'pipe', 'pipe'] });
 
     let stdout = '';
     let stderr = '';
@@ -243,6 +267,24 @@ function runRipgrep(args: string[]): Promise<string> {
       }
     });
 
-    rg.on('error', reject);
+    rg.on('error', (err: any) => {
+      if (err.code === 'ENOENT') {
+        reject(
+          new Error(
+            `\n\nripgrep (rg) binary not found.\n` +
+              `dist-guard requires ripgrep to scan files.\n` +
+              `\n👉 Install ripgrep using one of these methods:\n\n` +
+              `   macOS:   brew install ripgrep\n` +
+              `   Ubuntu:  sudo apt install ripgrep\n` +
+              `   Windows: winget install BurntSushi.ripgrep.MSVC\n\n` +
+              `Alternatively, rebuild the bundled binary (if you use pnpm/yarn):\n` +
+              `   pnpm rebuild @vscode/ripgrep\n` +
+              `   npm rebuild @vscode/ripgrep\n\n`,
+          ),
+        );
+      } else {
+        reject(err);
+      }
+    });
   });
 }

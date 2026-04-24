@@ -80,14 +80,14 @@ yarn dlx @webeach/dist-guard
 
 - `--target-dir <dir>` — directory to scan (default: `dist`).
 - `--pattern <glob>` — file pattern to scan (default: `*.*`).
-- `--ignore <rules>` — rule keys to ignore (comma-separated). Example: `--ignore StripeSecretKey,TwilioAPIKey`.
-- `--ignore-pattern <glob>` — ignore files/directories by glob pattern.
+- `--ignore-rules <rules>` — rule keys to ignore (comma-separated). Example: `--ignore-rules StripeSecretKey,TwilioAPIKey`.
+- `--ignore-patterns <globs>` — ignore files/directories by glob pattern (comma-separated).
 - `--no-redact` — disable secret redaction in the terminal output. Shows the full token.
 
 **Example:**
 
 ```bash
-npx @webeach/dist-guard --target-dir out --ignore GitHubToken --no-redact
+npx @webeach/dist-guard --target-dir out --ignore-rules GitHubToken --no-redact
 ```
 
 ### Configuration File
@@ -148,8 +148,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install
@@ -158,14 +162,14 @@ jobs:
         run: pnpm run build
 
       - name: Security Scan
-        run: pnpm dlx @webeach/dist-guard --target-dir dist
+        run: pnpm dist-guard --target-dir dist
 ```
 
 ---
 
 ## 🧩 Dependencies
 
-The project uses [ripgrep](https://github.com/BurntSushi/ripgrep) (`@vscode/ripgrep`) — one of the fastest search engines in the world, written in Rust. For parsing command-line arguments, the lightweight `cac` is used.
+The project uses [ripgrep](https://github.com/BurntSushi/ripgrep) — one of the fastest search engines in the world, written in Rust. For parsing command-line arguments, the lightweight `cac` is used.
 
 ---
 

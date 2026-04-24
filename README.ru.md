@@ -80,14 +80,14 @@ yarn dlx @webeach/dist-guard
 
 - `--target-dir <dir>` — директория для сканирования (по умолчанию: `dist`).
 - `--pattern <glob>` — маска файлов для сканирования (по умолчанию: `*.*`).
-- `--ignore <rules>` — ключи правил, которые нужно игнорировать (через запятую). Пример: `--ignore StripeSecretKey,TwilioAPIKey`.
-- `--ignore-pattern <glob>` — игнорировать файлы/директории по glob-маске.
+- `--ignore-rules <rules>` — ключи правил, которые нужно игнорировать (через запятую). Пример: `--ignore-rules StripeSecretKey,TwilioAPIKey`.
+- `--ignore-patterns <globs>` — игнорировать файлы/директории по glob-маске (через запятую).
 - `--no-redact` — отключить маскировку секретов в выводе терминала. Покажет полный токен.
 
 **Пример:**
 
 ```bash
-npx dist-guard --target-dir out --ignore GitHubToken --no-redact
+npx @webeach/dist-guard --target-dir out --ignore-rules GitHubToken --no-redact
 ```
 
 ### Файл конфигурации
@@ -148,8 +148,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install
@@ -158,14 +162,14 @@ jobs:
         run: pnpm run build
 
       - name: Security Scan
-        run: pnpm dlx @webeach/dist-guard --target-dir dist
+        run: pnpm dist-guard --target-dir dist
 ```
 
 ---
 
 ## 🧩 Зависимости
 
-В проекте используется [ripgrep](https://github.com/BurntSushi/ripgrep) (`@vscode/ripgrep`) — один из самых быстрых в мире поисковых движков, написанный на Rust. Для парсинга аргументов командной строки применяется легковесный `cac`.
+В проекте используется [ripgrep](https://github.com/BurntSushi/ripgrep) — один из самых быстрых в мире поисковых движков, написанный на Rust. Для парсинга аргументов командной строки применяется легковесный `cac`.
 
 ---
 
