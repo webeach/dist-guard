@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/webeach/dist-guard/compare/v0.1.1...v0.2.0) (2026-04-25)
+
+
+### Features
+
+* redesign scan API with include/exclude globs ([e9475c1](https://github.com/webeach/dist-guard/commit/e9475c1ee17bf170b1b42844972ad69327da939b))
+
 ## [0.1.1](https://github.com/webeach/dist-guard/compare/v0.1.0...v0.1.1) (2026-04-24)
 
 
