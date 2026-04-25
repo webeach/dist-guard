@@ -17,19 +17,22 @@ describe('Scanner Integration Tests', () => {
 
   /** Helper to run a scan on a specific string content */
   async function scanContent(content: string) {
-    const testFile = path.join(
-      tmpDir,
-      `test-${Date.now()}-${Math.random()}.js`,
-    );
+    const filename = `test-${Date.now()}-${Math.random()}.js`;
+    const testFile = path.join(tmpDir, filename);
     fs.writeFileSync(testFile, content, 'utf-8');
 
-    const config = resolveConfig({
-      targetDir: tmpDir,
-      pattern: path.basename(testFile),
-      redact: false, // Easier to debug tests if we see the full match
-    });
+    const originalCwd = process.cwd();
+    process.chdir(tmpDir);
 
-    return await scan(config);
+    try {
+      const config = resolveConfig({
+        include: [filename],
+        redact: false,
+      });
+      return await scan(config);
+    } finally {
+      process.chdir(originalCwd);
+    }
   }
 
   describe('Positive Matches (True Positives)', () => {
@@ -67,7 +70,8 @@ describe('Scanner Integration Tests', () => {
       },
       {
         name: 'Mapbox Secret Token',
-        content: 'const mapbox = "sk.ABCDEF1234.GHIJKL5678";',
+        content:
+          'const mapbox = "sk.ABCDEF1234567890ABCD.GHIJKL567890ABCDEF12";',
         expectedRule: 'MapboxSecretToken',
       },
       {

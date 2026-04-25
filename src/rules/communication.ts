@@ -13,8 +13,11 @@ export const communicationRules: ReadonlyArray<Rule> = [
     ],
   },
   {
+    // Context-aware: Line channel access tokens are 172-char base64 strings — too generic alone.
     key: 'LineMessagingToken',
-    patterns: [/\b[a-zA-Z0-9+/=]{172}\b/g],
+    patterns: [
+      /(?:line[_-]?(?:channel[_-]?)?(?:access[_-]?)?token|line[_-]?secret)\s*[:=]\s*['"]?([a-zA-Z0-9+/=]{172})['"]?/gi,
+    ],
   },
   {
     key: 'MicrosoftTeamsWebhook',

@@ -1,0 +1,69 @@
+<svg width="128" height="128" viewBox="0 0 483 482" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g transform="matrix(1,0,0,1,-12,17)">
+        <path d="M254,10L413,71C426.333,76.333 433,86.333 433,101L433,203C433,288.333 374,363 256,427C137.333,363.667 78,289.333 78,204L78,101C78,86.333 85,76.333 99,71L254,10Z" style="fill:url(#_Linear1);fill-rule:nonzero;"/>
+        <path d="M254,33L394,87C407.333,92.333 414,102 414,116L414,202C414,274.667 361.333,340.667 256,400C150.667,340.667 98,274.667 98,202L98,116C98,102 104.667,92.333 118,87L254,33Z" style="fill:url(#_Linear2);fill-rule:nonzero;stroke:rgb(127,220,255);stroke-opacity:0.55;stroke-width:2px;"/>
+        <g>
+            <clipPath id="_clip3">
+                <path d="M254,10L413,71C426.333,76.333 433,86.333 433,101L433,203C433,288.333 374,363 256,427C137.333,363.667 78,289.333 78,204L78,101C78,86.333 85,76.333 99,71L254,10Z"/>
+            </clipPath>
+            <g clip-path="url(#_clip3)">
+                <g opacity="0.22">
+                    <path d="M81,79L255,15L431,82L431,132L75,239L81,79Z" style="fill:white;fill-rule:nonzero;"/>
+                    <path d="M66,274L450,156L450,450L66,450L66,274Z" style="fill-rule:nonzero;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,-12,17)">
+        <path d="M134,94L163,94" style="fill:none;fill-rule:nonzero;stroke:rgb(159,102,255);stroke-width:10px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M175,94L179,94" style="fill:none;fill-rule:nonzero;stroke:rgb(159,102,255);stroke-width:10px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M194,94L228,94" style="fill:none;fill-rule:nonzero;stroke:rgb(159,102,255);stroke-width:10px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M247,94L255,94" style="fill:none;fill-rule:nonzero;stroke:rgb(100,167,255);stroke-width:10px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M274,94L278,94" style="fill:none;fill-rule:nonzero;stroke:rgb(73,213,255);stroke-width:10px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M178,119L195,119" style="fill:none;fill-rule:nonzero;stroke:rgb(159,102,255);stroke-width:9px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M211,119L218,119" style="fill:none;fill-rule:nonzero;stroke:rgb(159,102,255);stroke-width:9px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M231,119L310,119" style="fill:none;fill-rule:nonzero;stroke:rgb(56,212,255);stroke-width:9px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M239,145L264,145" style="fill:none;fill-rule:nonzero;stroke:rgb(53,112,218);stroke-width:6px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M286,145L322,145" style="fill:none;fill-rule:nonzero;stroke:rgb(25,191,255);stroke-width:6px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M240,166L255,166" style="fill:none;fill-rule:nonzero;stroke:rgb(67,131,237);stroke-width:8px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M274,166L301,166" style="fill:none;fill-rule:nonzero;stroke:rgb(37,201,255);stroke-width:8px;stroke-linecap:round;stroke-linejoin:round;"/>
+        <path d="M240,191L286,191" style="fill:none;fill-rule:nonzero;stroke:rgb(70,135,239);stroke-width:6px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,-12,17)">
+        <g transform="matrix(1,0,0,1,341,134)">
+            <text x="0px" y="0px" style="font-family:'Menlo-Bold', 'Menlo', monospace;font-weight:700;font-size:31px;fill:none;stroke:rgb(76,227,255);stroke-width:2.4px;">01</text>
+        </g>
+        <g transform="matrix(1,0,0,1,341,174)">
+            <text x="0px" y="0px" style="font-family:'Menlo-Bold', 'Menlo', monospace;font-weight:700;font-size:31px;fill:none;stroke:rgb(76,227,255);stroke-width:2.4px;">10</text>
+        </g>
+        <g transform="matrix(1,0,0,1,341,214)">
+            <text x="0px" y="0px" style="font-family:'Menlo-Bold', 'Menlo', monospace;font-weight:700;font-size:31px;fill:none;stroke:rgb(76,227,255);stroke-width:2.4px;">01</text>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,-12,17)">
+        <path d="M262,286L262,258C262,237 277,220 296,220C315,220 331,237 331,258L331,286" style="fill:none;fill-rule:nonzero;stroke:url(#_Linear4);stroke-width:18px;stroke-linecap:round;"/>
+        <path d="M262,286L262,258C262,237 277,220 296,220C315,220 331,237 331,258L331,286" style="fill:none;fill-rule:nonzero;stroke:white;stroke-opacity:0.18;stroke-width:5px;stroke-linecap:round;"/>
+        <path d="M362,298L362,370C362,376.071 357.071,381 351,381L242,381C235.929,381 231,376.071 231,370L231,298C231,291.929 235.929,287 242,287L351,287C357.071,287 362,291.929 362,298Z" style="fill:url(#_Linear5);"/>
+        <path d="M353,303L353,365C353,368.863 349.863,372 346,372L247,372C243.137,372 240,368.863 240,365L240,303C240,299.137 243.137,296 247,296L346,296C349.863,296 353,299.137 353,303Z" style="fill:white;fill-opacity:0.12;"/>
+        <circle cx="297" cy="329" r="14" style="fill:rgb(6,19,66);"/>
+        <path d="M292,338L285,361L309,361L302,338L292,338Z" style="fill:rgb(6,19,66);fill-rule:nonzero;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,-12,17)">
+        <circle cx="145" cy="207" r="76" style="fill:url(#_Linear6);"/>
+        <circle cx="145" cy="207" r="65" style="fill:rgb(19,11,80);"/>
+        <circle cx="145" cy="207" r="55" style="fill:rgb(23,16,92);fill-opacity:0.92;"/>
+        <path d="M104,197C110,181 122,171 141,166" style="fill:none;fill-rule:nonzero;stroke:rgb(255,161,255);stroke-width:10px;stroke-linecap:round;"/>
+        <path d="M91,263L37,319" style="fill:none;fill-rule:nonzero;stroke:url(#_Linear7);stroke-width:33px;stroke-linecap:round;"/>
+        <path d="M91,263L37,319" style="fill:none;fill-rule:nonzero;stroke:white;stroke-opacity:0.18;stroke-width:8px;stroke-linecap:round;"/>
+    </g>
+    <g id="wordmark">
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(355,-417,417,355,78,427)"><stop offset="0" style="stop-color:rgb(255,58,183);stop-opacity:1"/><stop offset="0.48" style="stop-color:rgb(159,102,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(37,215,255);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(316,367,-367,316,98,33)"><stop offset="0" style="stop-color:rgb(23,17,91);stop-opacity:1"/><stop offset="0.55" style="stop-color:rgb(7,23,67);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(4,11,39);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear4" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(69,0,0,69,262,220)"><stop offset="0" style="stop-color:rgb(255,58,183);stop-opacity:1"/><stop offset="0.45" style="stop-color:rgb(159,102,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(36,215,255);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear5" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(131,94,-94,131,231,287)"><stop offset="0" style="stop-color:rgb(255,76,202);stop-opacity:1"/><stop offset="0.48" style="stop-color:rgb(183,121,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(42,221,255);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear6" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(152,152,-152,152,69,131)"><stop offset="0" style="stop-color:rgb(255,76,202);stop-opacity:1"/><stop offset="0.48" style="stop-color:rgb(183,121,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(42,221,255);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear7" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(54,56,-56,54,37,263)"><stop offset="0" style="stop-color:rgb(255,76,202);stop-opacity:1"/><stop offset="0.48" style="stop-color:rgb(183,121,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(42,221,255);stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>

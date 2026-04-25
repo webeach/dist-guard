@@ -14,14 +14,12 @@ export interface Rule {
 
 /** dist-guard configuration. */
 export interface Config {
-  /** Path to the dist directory to scan. @default "./dist" */
-  readonly targetDir: string;
-  /** Glob pattern for file matching. @default "*.*" */
-  readonly pattern: string;
+  /** Glob patterns for files to scan. @default ["{dist,build}/**\/*.*"] */
+  readonly include: ReadonlyArray<string>;
+  /** Glob patterns for files/directories to exclude from scanning. @default [] */
+  readonly exclude: ReadonlyArray<string>;
   /** Rule keys to ignore during scanning. @default [] */
   readonly ignoreRules: ReadonlyArray<string>;
-  /** Glob patterns for files/directories to ignore. @default [] */
-  readonly ignorePatterns: ReadonlyArray<string>;
   /**
    * Whether to mask matched secrets in output.
    * When true, shows first/last 4 chars with `*` in between.

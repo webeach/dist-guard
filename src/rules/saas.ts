@@ -70,9 +70,10 @@ export const saasRules: ReadonlyArray<Rule> = [
     patterns: [/\bglsa_[a-zA-Z0-9_]{32,}_[a-f0-9]{8}\b/g],
   },
   {
-    // Unique structure: sk.xxxx.yyyy
+    // Unique structure: sk.<base64url_20+>.<base64url_20+>
+    // Real Mapbox secret tokens have long base64-encoded segments; short placeholder examples like sk.xxxx.yyyy are excluded.
     key: 'MapboxSecretToken',
-    patterns: [/\bsk\.[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+\b/g],
+    patterns: [/\bsk\.[a-zA-Z0-9_-]{20,}\.[a-zA-Z0-9_-]{20,}\b/g],
   },
   {
     // Context-aware: Mixpanel, Segment, Amplitude often use 32-char hex strings.

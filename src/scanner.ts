@@ -2,7 +2,6 @@ import { rules as allRules } from './rules/index.js';
 import type { Config, Finding, Rule, ScanResult } from './types/common.js';
 
 import { spawn, spawnSync } from 'node:child_process';
-import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
@@ -98,7 +97,6 @@ function identifyRule(
  * Builds ripgrep arguments for scanning.
  */
 function buildRgArgs(config: Config, regexPatterns: string[]): string[] {
-  const targetDir = path.resolve(config.targetDir);
   const args: string[] = [
     '--json',
     '--no-heading',
@@ -108,42 +106,28 @@ function buildRgArgs(config: Config, regexPatterns: string[]): string[] {
     '--pcre2',
   ];
 
-  // Add file pattern
-  if (config.pattern && config.pattern !== '*.*') {
-    args.push('--glob', config.pattern);
+  for (const glob of config.include) {
+    args.push('--glob', glob);
   }
 
-  // Add ignore patterns
-  for (const ignorePattern of config.ignorePatterns) {
-    args.push('--glob', `!${ignorePattern}`);
+  for (const glob of config.exclude) {
+    args.push('--glob', `!${glob}`);
   }
 
-  // Add all regex patterns
   for (const pattern of regexPatterns) {
     args.push('-e', pattern);
   }
 
-  args.push(targetDir);
+  args.push('.');
 
   return args;
 }
 
 /**
- * Scans the target directory for leaked secrets using ripgrep.
+ * Scans files matching the include globs for leaked secrets using ripgrep.
  */
 export async function scan(config: Config): Promise<ScanResult> {
   const startTime = performance.now();
-
-  // Validate target directory
-  const targetDir = path.resolve(config.targetDir);
-  if (!fs.existsSync(targetDir)) {
-    return {
-      findings: [],
-      filesScanned: 0,
-      duration: Math.round(performance.now() - startTime),
-      success: true,
-    };
-  }
 
   // Filter rules based on ignoreRules
   const ignoreSet = new Set(config.ignoreRules);

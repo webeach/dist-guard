@@ -5,19 +5,17 @@ import path from 'node:path';
 
 /** Default configuration values. */
 const DEFAULT_CONFIG: Config = {
-  targetDir: './dist',
-  pattern: '*.*',
+  include: ['{dist,build}/**/*.*'],
+  exclude: [],
   ignoreRules: [],
-  ignorePatterns: [],
   redact: true,
 };
 
 /** Partial config that can come from external sources. */
 export interface PartialConfig {
-  targetDir?: string;
-  pattern?: string;
+  include?: string[];
+  exclude?: string[];
   ignoreRules?: string[];
-  ignorePatterns?: string[];
   redact?: boolean;
 }
 
@@ -64,10 +62,9 @@ function readConfigFile(cwd: string): PartialConfig {
  */
 function mergeConfig(base: Config, partial: PartialConfig): Config {
   return {
-    targetDir: partial.targetDir ?? base.targetDir,
-    pattern: partial.pattern ?? base.pattern,
+    include: partial.include ?? base.include,
+    exclude: partial.exclude ?? base.exclude,
     ignoreRules: partial.ignoreRules ?? base.ignoreRules,
-    ignorePatterns: partial.ignorePatterns ?? base.ignorePatterns,
     redact: partial.redact ?? base.redact,
   };
 }

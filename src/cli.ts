@@ -23,13 +23,15 @@ function getVersion(): string {
 const cli = cac('dist-guard');
 
 cli
-  .option('-t, --target-dir <path>', 'Target directory to scan')
-  .option('-p, --pattern <glob>', 'File pattern to search')
-  .option('-r, --ignore-rules <rules>', 'Comma-separated rule keys to ignore')
   .option(
-    '-i, --ignore-patterns <globs>',
-    'Comma-separated file patterns to ignore',
+    '-i, --include <globs>',
+    'Comma-separated glob patterns of files to scan',
   )
+  .option(
+    '-x, --exclude <globs>',
+    'Comma-separated glob patterns of files to exclude',
+  )
+  .option('-r, --ignore-rules <rules>', 'Comma-separated rule keys to ignore')
   .option('--no-redact', 'Show secrets in plain text instead of masking them');
 
 cli.help();
@@ -54,25 +56,24 @@ async function run(options: Record<string, any>): Promise<void> {
   // Build CLI overrides from parsed options
   const cliOverrides: PartialConfig = {};
 
-  if (options.targetDir !== undefined) {
-    cliOverrides.targetDir = options.targetDir;
+  if (options.include !== undefined) {
+    cliOverrides.include = String(options.include)
+      .split(',')
+      .map((glob: string) => glob.trim())
+      .filter(Boolean);
   }
 
-  if (options.pattern !== undefined) {
-    cliOverrides.pattern = options.pattern;
+  if (options.exclude !== undefined) {
+    cliOverrides.exclude = String(options.exclude)
+      .split(',')
+      .map((glob: string) => glob.trim())
+      .filter(Boolean);
   }
 
   if (options.ignoreRules !== undefined) {
     cliOverrides.ignoreRules = String(options.ignoreRules)
       .split(',')
       .map((rule: string) => rule.trim())
-      .filter(Boolean);
-  }
-
-  if (options.ignorePatterns !== undefined) {
-    cliOverrides.ignorePatterns = String(options.ignorePatterns)
-      .split(',')
-      .map((pattern: string) => pattern.trim())
       .filter(Boolean);
   }
 

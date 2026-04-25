@@ -3,9 +3,11 @@ import type { Rule } from '../types/common.js';
 /** Generic secret detection rules (sorted by key). */
 export const genericRules: ReadonlyArray<Rule> = [
   {
+    // Username: RFC 3986 userinfo chars, no slashes or quotes.
+    // Password: no whitespace, quotes, or structural chars that indicate non-credential context.
     key: 'BasicAuthURL',
     patterns: [
-      /\bhttps?:\/\/[^\s@]+:[^\s@]+@[a-zA-Z0-9.-]+(?:\.[a-zA-Z]{2,})?(?::\d{1,5})?[\w/]*\b/g,
+      /\bhttps?:\/\/[a-zA-Z0-9._%+-]{3,}:[^\s@"'<>{}[\]\\]{3,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?::\d{1,5})?(?:\/[\w/.-]*)?\b/g,
     ],
   },
   {

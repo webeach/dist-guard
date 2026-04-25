@@ -1,16 +1,16 @@
 <div align="center">
   <p>
-    <img alt="dist-guard" src="./assets/logo.png" height="260">
+    <img alt="dist-guard" src="./assets/logo.svg" height="260">
   </p>
   <p>
     <a href="https://www.npmjs.com/package/@webeach/dist-guard">
-       <img src="https://img.shields.io/npm/v/@webeach/dist-guard.svg?color=646fe1&labelColor=9B7AEF" alt="npm package" />
+       <img src="https://img.shields.io/npm/v/@webeach/dist-guard.svg?color=009BBF&labelColor=9F66FF" alt="npm package" />
     </a>
     <a href="https://github.com/webeach/dist-guard/actions">
-      <img src="https://img.shields.io/github/actions/workflow/status/webeach/dist-guard/ci.yml?color=646fe1&labelColor=9B7AEF" alt="build" />
+      <img src="https://img.shields.io/github/actions/workflow/status/webeach/dist-guard/ci.yml?color=009BBF&labelColor=9F66FF" alt="build" />
     </a>
     <a href="https://www.npmjs.com/package/@webeach/dist-guard">
-      <img src="https://img.shields.io/npm/dm/@webeach/dist-guard.svg?color=646fe1&labelColor=9B7AEF" alt="npm downloads" />
+      <img src="https://img.shields.io/npm/dm/@webeach/dist-guard.svg?color=009BBF&labelColor=9F66FF" alt="npm downloads" />
     </a>
   </p>
   <p><a href="./README.md">🇺🇸 English version</a> | <a href="./README.ru.md">🇷🇺 Русская версия</a></p>
@@ -78,16 +78,17 @@ yarn dlx @webeach/dist-guard
 
 ### CLI Flags
 
-- `--target-dir <dir>` — directory to scan (default: `dist`).
-- `--pattern <glob>` — file pattern to scan (default: `*.*`).
-- `--ignore-rules <rules>` — rule keys to ignore (comma-separated). Example: `--ignore-rules StripeSecretKey,TwilioAPIKey`.
-- `--ignore-patterns <globs>` — ignore files/directories by glob pattern (comma-separated).
-- `--no-redact` — disable secret redaction in the terminal output. Shows the full token.
+| Flag                     | Alias | Description                                        | Default               |
+| ------------------------ | ----- | -------------------------------------------------- | --------------------- |
+| `--include <globs>`      | `-i`  | Comma-separated glob patterns of files to scan     | `{dist,build}/**/*.*` |
+| `--exclude <globs>`      | `-x`  | Comma-separated glob patterns of files to exclude  | —                     |
+| `--ignore-rules <rules>` | `-r`  | Comma-separated rule keys to ignore                | —                     |
+| `--no-redact`            | —     | Show secrets in plain text instead of masking them | —                     |
 
 **Example:**
 
 ```bash
-npx @webeach/dist-guard --target-dir out --ignore-rules GitHubToken --no-redact
+npx @webeach/dist-guard -i "out/**/*.*" -r GitHubToken --no-redact
 ```
 
 ### Configuration File
@@ -100,8 +101,8 @@ npx @webeach/dist-guard --target-dir out --ignore-rules GitHubToken --no-redact
 {
   "name": "my-project",
   "distGuard": {
-    "targetDir": "build",
-    "ignorePatterns": ["**/*.map", "vendor/**"],
+    "include": ["{dist,build}/**/*.*"],
+    "exclude": ["**/*.map", "vendor/**"],
     "ignoreRules": ["GenericAPIKey"],
     "redact": false
   }
@@ -112,9 +113,9 @@ npx @webeach/dist-guard --target-dir out --ignore-rules GitHubToken --no-redact
 
 ```json
 {
-  "$schema": "https://schemas.webea.ch/dist-guard/v0.1.json",
-  "targetDir": "build",
-  "ignorePatterns": ["**/*.map", "vendor/**"],
+  "$schema": "https://schemas.webea.ch/dist-guard/v0.2.json",
+  "include": ["{dist,build}/**/*.*"],
+  "exclude": ["**/*.map", "vendor/**"],
   "ignoreRules": ["GenericAPIKey"],
   "redact": false
 }
@@ -162,7 +163,7 @@ jobs:
         run: pnpm run build
 
       - name: Security Scan
-        run: pnpm dist-guard --target-dir dist
+        run: pnpm dist-guard
 ```
 
 ---
@@ -170,21 +171,6 @@ jobs:
 ## 🧩 Dependencies
 
 The project uses [ripgrep](https://github.com/BurntSushi/ripgrep) — one of the fastest search engines in the world, written in Rust. For parsing command-line arguments, the lightweight `cac` is used.
-
----
-
-## 🔖 Releasing a New Version
-
-Releases are handled automatically using `semantic-release`.
-
-Before publishing a new version, make sure:
-
-1. All changes are committed and pushed to the `main` branch.
-2. Commit messages follow the [Conventional Commits](https://www.conventionalcommits.org/) format:
-   - `feat: ...` — for new features
-   - `fix: ...` — for bug fixes
-   - `chore: ...`, `refactor: ...` and other types — as needed
-3. Versioning is determined automatically based on commit types (`patch`, `minor`, `major`).
 
 ---
 

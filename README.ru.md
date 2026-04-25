@@ -1,16 +1,16 @@
 <div align="center">
   <p>
-    <img alt="dist-guard" src="./assets/logo.png" height="260">
+    <img alt="dist-guard" src="./assets/logo.svg" height="260">
   </p>
   <p>
     <a href="https://www.npmjs.com/package/@webeach/dist-guard">
-       <img src="https://img.shields.io/npm/v/@webeach/dist-guard.svg?color=646fe1&labelColor=9B7AEF" alt="npm package" />
+       <img src="https://img.shields.io/npm/v/@webeach/dist-guard.svg?color=009BBF&labelColor=9F66FF" alt="npm package" />
     </a>
     <a href="https://github.com/webeach/dist-guard/actions">
-      <img src="https://img.shields.io/github/actions/workflow/status/webeach/dist-guard/ci.yml?color=646fe1&labelColor=9B7AEF" alt="build" />
+      <img src="https://img.shields.io/github/actions/workflow/status/webeach/dist-guard/ci.yml?color=009BBF&labelColor=9F66FF" alt="build" />
     </a>
     <a href="https://www.npmjs.com/package/@webeach/dist-guard">
-      <img src="https://img.shields.io/npm/dm/@webeach/dist-guard.svg?color=646fe1&labelColor=9B7AEF" alt="npm downloads" />
+      <img src="https://img.shields.io/npm/dm/@webeach/dist-guard.svg?color=009BBF&labelColor=9F66FF" alt="npm downloads" />
     </a>
   </p>
   <p><a href="./README.md">🇺🇸 English version</a> | <a href="./README.ru.md">🇷🇺 Русская версия</a></p>
@@ -78,16 +78,17 @@ yarn dlx @webeach/dist-guard
 
 ### CLI Флаги
 
-- `--target-dir <dir>` — директория для сканирования (по умолчанию: `dist`).
-- `--pattern <glob>` — маска файлов для сканирования (по умолчанию: `*.*`).
-- `--ignore-rules <rules>` — ключи правил, которые нужно игнорировать (через запятую). Пример: `--ignore-rules StripeSecretKey,TwilioAPIKey`.
-- `--ignore-patterns <globs>` — игнорировать файлы/директории по glob-маске (через запятую).
-- `--no-redact` — отключить маскировку секретов в выводе терминала. Покажет полный токен.
+| Флаг                     | Алиас | Описание                                              | По умолчанию          |
+| ------------------------ | ----- | ----------------------------------------------------- | --------------------- |
+| `--include <globs>`      | `-i`  | Glob-паттерны файлов для сканирования (через запятую) | `{dist,build}/**/*.*` |
+| `--exclude <globs>`      | `-x`  | Glob-паттерны файлов для исключения (через запятую)   | —                     |
+| `--ignore-rules <rules>` | `-r`  | Ключи правил для игнорирования (через запятую)        | —                     |
+| `--no-redact`            | —     | Показывать секреты без маскировки                     | —                     |
 
 **Пример:**
 
 ```bash
-npx @webeach/dist-guard --target-dir out --ignore-rules GitHubToken --no-redact
+npx @webeach/dist-guard -i "out/**/*.*" -r GitHubToken --no-redact
 ```
 
 ### Файл конфигурации
@@ -100,8 +101,8 @@ npx @webeach/dist-guard --target-dir out --ignore-rules GitHubToken --no-redact
 {
   "name": "my-project",
   "distGuard": {
-    "targetDir": "build",
-    "ignorePatterns": ["**/*.map", "vendor/**"],
+    "include": ["{dist,build}/**/*.*"],
+    "exclude": ["**/*.map", "vendor/**"],
     "ignoreRules": ["GenericAPIKey"],
     "redact": false
   }
@@ -112,9 +113,9 @@ npx @webeach/dist-guard --target-dir out --ignore-rules GitHubToken --no-redact
 
 ```json
 {
-  "$schema": "https://schemas.webea.ch/dist-guard/v0.1.json",
-  "targetDir": "build",
-  "ignorePatterns": ["**/*.map", "vendor/**"],
+  "$schema": "https://schemas.webea.ch/dist-guard/v0.2.json",
+  "include": ["{dist,build}/**/*.*"],
+  "exclude": ["**/*.map", "vendor/**"],
   "ignoreRules": ["GenericAPIKey"],
   "redact": false
 }
@@ -162,7 +163,7 @@ jobs:
         run: pnpm run build
 
       - name: Security Scan
-        run: pnpm dist-guard --target-dir dist
+        run: pnpm dist-guard
 ```
 
 ---
@@ -170,21 +171,6 @@ jobs:
 ## 🧩 Зависимости
 
 В проекте используется [ripgrep](https://github.com/BurntSushi/ripgrep) — один из самых быстрых в мире поисковых движков, написанный на Rust. Для парсинга аргументов командной строки применяется легковесный `cac`.
-
----
-
-## 🔖 Выпуск новой версии
-
-Релизы обрабатываются автоматически с помощью `semantic-release`.
-
-Перед публикацией новой версии убедись, что:
-
-1. Все изменения закоммичены и запушены в ветку `main`.
-2. Сообщения коммитов соответствуют формату [Conventional Commits](https://www.conventionalcommits.org/ru/v1.0.0/):
-   - `feat: ...` — для новых фич
-   - `fix: ...` — для исправлений багов
-   - `chore: ...`, `refactor: ...` и другие типы — по необходимости
-3. Версионирование определяется автоматически на основе типа коммитов (`patch`, `minor`, `major`).
 
 ---
 
