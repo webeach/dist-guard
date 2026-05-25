@@ -218,4 +218,41 @@ describe('Scanner Integration Tests', () => {
       });
     }
   });
+
+  describe('Gitignore handling', () => {
+    it('scans files even when they are listed in .gitignore', async () => {
+      const fixtureDir = fs.mkdtempSync(
+        path.join(os.tmpdir(), 'dist-guard-gitignore-'),
+      );
+
+      try {
+        // Make this look like a real project where `dist/` is gitignored.
+        fs.writeFileSync(path.join(fixtureDir, '.gitignore'), 'dist/\n');
+        fs.mkdirSync(path.join(fixtureDir, 'dist'));
+        fs.writeFileSync(
+          path.join(fixtureDir, 'dist', 'index.js'),
+          'const token = "ghp_1234567890abcdef1234567890abcdef1234";',
+        );
+
+        const originalCwd = process.cwd();
+        process.chdir(fixtureDir);
+
+        try {
+          const config = resolveConfig({
+            include: ['dist/**/*.js'],
+            redact: false,
+          });
+          const result = await scan(config);
+
+          expect(result.filesScanned).toBeGreaterThan(0);
+          expect(result.findings.length).toBeGreaterThan(0);
+          expect(result.findings[0].ruleKey).toBe('GitHubToken');
+        } finally {
+          process.chdir(originalCwd);
+        }
+      } finally {
+        fs.rmSync(fixtureDir, { recursive: true, force: true });
+      }
+    });
+  });
 });

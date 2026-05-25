@@ -95,6 +95,12 @@ function identifyRule(
 
 /**
  * Builds ripgrep arguments for scanning.
+ *
+ * @remarks
+ * `--no-ignore` is essential: build artifacts (`dist/`, `build/`) are almost
+ * universally listed in `.gitignore` / `.ignore` files, and ripgrep would
+ * silently skip them by default — producing a misleading "0 files scanned"
+ * result. The user's `include`/`exclude` globs are the sole intended filter.
  */
 function buildRgArgs(config: Config, regexPatterns: string[]): string[] {
   const args: string[] = [
@@ -103,6 +109,7 @@ function buildRgArgs(config: Config, regexPatterns: string[]): string[] {
     '--line-number',
     '--column',
     '--no-filename',
+    '--no-ignore',
     '--pcre2',
   ];
 
