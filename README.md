@@ -13,7 +13,7 @@
       <img src="https://img.shields.io/npm/dm/@webeach/dist-guard.svg?color=009BBF&labelColor=9F66FF" alt="npm downloads" />
     </a>
   </p>
-  <p><a href="./README.md">🇺🇸 English version</a> | <a href="./README.ru.md">🇷🇺 Русская версия</a></p>
+  <p style="color:rgba(0,0,0,0)"><a href="./README.md">🇺🇸 English version</a> | <a href="./README.ru.md">🇷🇺 Русская версия</a></p>
   <p>A blazing fast CLI tool to scan your compiled (dist) files for leaked tokens, API keys, passwords, and other private data before deploying.</p>
 </div>
 

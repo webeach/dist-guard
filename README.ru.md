@@ -13,7 +13,7 @@
       <img src="https://img.shields.io/npm/dm/@webeach/dist-guard.svg?color=009BBF&labelColor=9F66FF" alt="npm downloads" />
     </a>
   </p>
-  <p><a href="./README.md">🇺🇸 English version</a> | <a href="./README.ru.md">🇷🇺 Русская версия</a></p>
+  <p style="color:rgba(0,0,0,0)"><a href="./README.md">🇺🇸 English version</a> | <a href="./README.ru.md">🇷🇺 Русская версия</a></p>
   <p>Молниеносный CLI-инструмент для сканирования собранных (dist) файлов на наличие забытых токенов, API-ключей, паролей и других приватных данных перед деплоем.</p>
 </div>
 
