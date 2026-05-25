@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/webeach/dist-guard/compare/v0.2.0...v0.2.1) (2026-05-25)
+
+
+### Bug Fixes
+
+* pass --no-ignore to ripgrep so gitignored dist/ is scanned ([c0651c8](https://github.com/webeach/dist-guard/commit/c0651c892d39351518670239306ad243a2bf1218))
+
 # [0.2.0](https://github.com/webeach/dist-guard/compare/v0.1.1...v0.2.0) (2026-04-25)
 
 

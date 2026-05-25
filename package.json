@@ -1,6 +1,6 @@
 {
   "name": "@webeach/dist-guard",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Blazing fast CLI to scan your compiled code (dist) for leaked tokens, API keys, and other secrets before deploying.",
   "keywords": [
     "api-keys",
